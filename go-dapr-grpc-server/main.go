@@ -21,7 +21,7 @@ type todoListManage struct {
 }
 
 const (
-	port = 50051
+	port = 4999
 )
 
 type server struct {
@@ -42,7 +42,7 @@ func newServer() *server {
 				TodoLists: []*pb.TodoListData{
 					initData,
 				},
-				Size: 0,
+				Size: 1,
 			},
 		},
 		UnimplementedTodoListServer: pb.UnimplementedTodoListServer{},
@@ -71,6 +71,7 @@ func addTodoListHandle(s *server) func(w http.ResponseWriter, r *http.Request) {
 			Title:     body.Title,
 			CreatedAt: uint64(time.Now().Unix()),
 		})
+		s.todoListMng.TodoListResponse.Size = uint32(len(s.todoListMng.TodoListResponse.TodoLists))
 
 		writeRes(w, body)
 	}

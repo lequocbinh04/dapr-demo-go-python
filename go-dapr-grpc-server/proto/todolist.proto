@@ -1,0 +1,20 @@
+syntax = "proto3";
+import "google/protobuf/empty.proto";
+
+package proto;
+
+option go_package = "proto/";
+
+message TodoListData {
+  string title = 1;
+  uint64 created_at = 2;
+}
+
+message TodoListResponse {
+  repeated TodoListData todoLists = 1;
+  uint32 size = 2;
+}
+
+service TodoList {
+  rpc GetTodolist(google.protobuf.Empty) returns (TodoListResponse);
+}
