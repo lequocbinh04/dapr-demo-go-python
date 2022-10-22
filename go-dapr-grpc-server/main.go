@@ -83,6 +83,9 @@ func main() {
 	go func(s *server) {
 		log.Printf("starting http server on port %d", 8080)
 		http.HandleFunc("/add-todo-list", addTodoListHandle(s))
+		http.HandleFunc("/ping", func(w http.ResponseWriter, r *http.Request) {
+			writeRes(w, "pong")
+		})
 		http.ListenAndServe(":8080", nil)
 	}(serverStruct)
 
