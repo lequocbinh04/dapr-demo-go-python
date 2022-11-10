@@ -16,7 +16,7 @@ def run():
 
     port = "5000"
 
-    with grpc.insecure_channel('172.31.33.200:' + str(port)) as channel:
+    with grpc.insecure_channel('localhost:' + str(port)) as channel:
         stub = todolist_pb2_grpc.TodoListStub(channel)
         metadata = (('dapr-app-id', 'server'),)
         response = stub.GetTodolist(request=todolist_pb2.google_dot_protobuf_dot_empty__pb2.Empty(), metadata=metadata)
