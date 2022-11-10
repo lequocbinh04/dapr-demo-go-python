@@ -14,7 +14,7 @@ app = Flask(__name__)
 
 def run():
 
-    port = "3030"
+    port = "5000"
 
     with grpc.insecure_channel('172.31.33.200:' + str(port)) as channel:
         stub = todolist_pb2_grpc.TodoListStub(channel)
